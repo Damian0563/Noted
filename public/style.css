@@ -1,0 +1,166 @@
+*{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: black;
+    color:white;
+}
+
+
+.upper{
+    position: absolute;
+    top:5%;
+    right:5%;
+    display: flex;
+}
+
+#signin,#signup{
+    width:10rem;
+    font-size: 1.5rem;
+    height: 5%;
+    border-radius: 10%;
+    border: 1rem solid blueviolet;
+    background-color: blueviolet;
+    color:white;
+    margin:3%;
+    transition: transform background-color 0.5 ease;
+}
+
+#signin:hover,#signup:hover{
+    transform: scale(1.1);
+    background-color: rgb(17, 17, 189);
+    border: 1rem solid rgb(17, 17, 189);
+}
+
+.main_landing{
+    position: absolute;
+    top:28%;
+    display: flex;
+    margin-right: 13%;
+    margin-left:5% ;
+}
+
+.eye_catcher{
+    margin-top: 10%;
+    padding: 0;
+    font-size: 3rem;
+    font-weight: bolder;
+    text-align: center;
+}
+.eye{
+    margin-bottom: 0%;
+    height: 30%;
+    font-size: 3rem;
+    font-weight: bolder;
+    color: blueviolet;
+    text-align: center;
+}
+.logo{
+    width:120%;
+    height: 100%;
+    margin-left:15%;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container for the form */
+.sign_box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input Fields */
+.sign_inp {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    transition: border 0.3s ease;
+}
+
+/* Focus Effect on Input Fields */
+.sign_inp:focus {
+    outline: none;
+    border-color: #4c8bf5;
+}
+
+/* Placeholder Text Style */
+.sign_inp::placeholder {
+    color: #888;
+}
+
+/* Add padding between inputs */
+.sign_inp:first-child {
+    margin-top: 0;
+}
+
+.submit {
+    background-color: #4c8bf5;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.submit:hover {
+    background-color: #3578e5;
+}
+
+/* General styles for the back button */
+.back {
+    position: absolute; /* Position it anywhere on the page */
+    top: 4%; /* Distance from the top */
+    left: 4%; /* Distance from the left */
+    background-color: inherit;
+}
+
+/* Home Icon (Image) */
+.home {
+    background-color: inherit;
+    transition: transform 0.3s ease; 
+    /* Smooth hover effect */
+}
+
+/* Hover effect on the home icon */
+.home:hover {
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+}
+
+.brand{
+    position: absolute;
+    top:7%;
+    left:5%;
+}
+
+.description{
+    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    margin:3%;
+    padding: 1%;
+}
