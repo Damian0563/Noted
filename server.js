@@ -1,5 +1,5 @@
 require('dotenv').config()
-const {CheckDuplicates,SaveUser,VerifyCredentials,GetIdByName,GetNotes}=require('./database.js')
+const {CheckDuplicates,SaveUser,VerifyCredentials,GetIdByName,GetNotes,SaveNote}=require('./database.js')
 const express=require('express');
 const path=require('path')
 const app=express();
@@ -42,7 +42,7 @@ app.get('/sign_in',(req,res)=>{
 app.get('/noted/:id',async (req,res)=>{
     notes=await GetNotes(req.params.id);
     console.log(notes)
-    res.render('main.ejs',{notes:notes})
+    res.render('main.ejs',{notes:notes,id:req.params.id})
 })
 
 app.post('/sign_in', async(req,res)=>{
@@ -53,7 +53,10 @@ app.post('/sign_in', async(req,res)=>{
     }
 })
 
-
+app.post('/save',async(req,res)=>{
+    SaveNote(req.body)
+    res.status(200).send({message:"Success"})
+})
 
 app.listen(process.env.PORT,()=>{
     console.log('Server running on port',process.env.PORT)

@@ -112,10 +112,32 @@ async function GetNotes(id){
     }
 }
 
+async function SaveNote(body){
+    try{
+        await mongo.connect(process.env.DB)
+        username=await User.findOne({"_id":body.id}).Username
+        const saved=new Note({
+            Username:username,
+            Notes:[
+                {
+                    Name:body.file_name,
+                    Content:body.content,
+                }
+            ]
+        })
+        await saved.save()
+    }catch(e){
+        console.error(e);
+    }finally{
+        await mongo.connection.close()
+    }
+}
+
 module.exports={
     CheckDuplicates,
     SaveUser,
     VerifyCredentials,
     GetIdByName,
-    GetNotes
+    GetNotes,
+    SaveNote
 }

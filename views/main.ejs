@@ -7,6 +7,7 @@
     </head>
 
     <body>
+        <input type="hidden" id="usr_id" value="<%=id%>">
         <div class="brand">Noted</div>
         <div class="upper">
             <button class="signout" id="signout">Sign out</button>
@@ -14,15 +15,18 @@
 
         <div class="upper_lower">
             <button class="add_note" id="add">Add new note</button>
+            <button class="save_note" id="save">Save note</button>
         </div>
         <div class="notes" style="min-height:80vh ;">
             <div class="note_wrapper">
                 <div class="my_notes" id="my_notes">
-                    
+                    <% notes.forEach(note => { %>
+                            <%= note[0] %>
+                    <% }); %>
                 </div>
             </div>
             <div class="current_note">
-                <p class="poinetr"></p>
+                <p class="pointer" id="pointer">New Note</p>
                 <textarea class="note_content" id="input">
                     
                 </textarea>
