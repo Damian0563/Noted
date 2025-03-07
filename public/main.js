@@ -1,7 +1,8 @@
 
-
 document.addEventListener('DOMContentLoaded',()=>{
 
+    let pointer=document.getElementById('pointer').textContent
+    pointer=document.getElementsByClassName('note')[0].innerHTML
     document.getElementById('signout').addEventListener('click',()=>{
         window.location.href='/'
     })
@@ -37,4 +38,16 @@ document.addEventListener('DOMContentLoaded',()=>{
         .catch(e=>console.error(e))
     })
     
+
+    fetch('/grab',{
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+            "file_name":pointer
+        })
+    }).then(response=>response.json())
+    .then(data=>console.log(data))
+    .catch(e=>console.error(e))
 })
+
+

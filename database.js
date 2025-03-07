@@ -116,16 +116,21 @@ async function SaveNote(body){
     try{
         await mongo.connect(process.env.DB)
         username=await User.findOne({"_id":body.id}).Username
-        const saved=new Note({
-            Username:username,
-            Notes:[
-                {
-                    Name:body.file_name,
-                    Content:body.content,
-                }
-            ]
-        })
-        await saved.save()
+        update= await Note.findOne({"Username":username,"Name":body.file_name})
+        if(!update){
+            const saved=new Note({
+                Username:username,
+                Notes:[
+                    {
+                        Name:body.file_name,
+                        Content:body.content,
+                    }
+                ]
+            })
+            await saved.save()
+        }else{
+            await Note.updateOne({Username:username},{$set:{Content:body.content,Date:new Date()}})
+        }
     }catch(e){
         console.error(e);
     }finally{
@@ -133,11 +138,26 @@ async function SaveNote(body){
     }
 }
 
+async function GetText(name){
+    try{
+        await mongo.connect(process.env.DB)
+        const query=await Note.findOne({"Notes.Name":name});
+        const text=query.Notes.find(note => note.Name === name).Content
+        return text
+    }catch(e){
+        console.error(e)
+    }finally{
+        await mongo.connection.close()
+    }
+}
+
+
 module.exports={
     CheckDuplicates,
     SaveUser,
     VerifyCredentials,
     GetIdByName,
     GetNotes,
-    SaveNote
+    SaveNote,
+    GetText
 }

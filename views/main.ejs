@@ -21,12 +21,12 @@
             <div class="note_wrapper">
                 <div class="my_notes" id="my_notes">
                     <% notes.forEach(note => { %>
-                            <%= note[0] %>
+                        <div class="note"><%= note %></div>
                     <% }); %>
                 </div>
             </div>
             <div class="current_note">
-                <p class="pointer" id="pointer">New Note</p>
+                <p class="pointer" id="pointer"></p>
                 <textarea class="note_content" id="input">
                     
                 </textarea>
