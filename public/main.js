@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded',()=>{
             newDiv.classList.add('note');
             container.appendChild(newDiv);
             document.getElementById('pointer').textContent = 'New Note';
+            pointer.innerText='New Note';
+            document.getElementById('input').value=''
         }
     });
     document.getElementById('save').addEventListener('click',()=>{
@@ -38,11 +40,22 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
     
     let notes = Array.from(document.getElementsByClassName('note')).map(note => note.innerHTML);
-    for(note of notes){
+    notes.forEach(note => {
         document.getElementById(`${note}`).addEventListener('click',()=>{
             pointer.innerText=note;
+            fetch('/grab',{
+                method:"POST",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({
+                    "file_name":pointer.innerText,
+                })
+            }).then(response=>response.json())
+            .then(data=>{
+                document.getElementById('input').value=data.text;
+            })
+            .catch(e=>console.error(e))
         })
-    }
+    });
 
     fetch('/grab',{
         method:"POST",
