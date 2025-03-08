@@ -82,6 +82,8 @@
     color: black;
     padding: 1%;
     max-width: 15%;
+    display: block; 
+    /* test  display*/
 }
 
 .current_note{

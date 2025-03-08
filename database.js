@@ -117,7 +117,6 @@ async function SaveNote(body){
         await mongo.connect(process.env.DB)
         username=await User.findOne({"_id":body.id}).Username
         update= await Note.findOne({"Username":username,"Name":body.file_name})
-        console.log(update)
         if(!update){
             const saved=new Note({
                 Username:username,

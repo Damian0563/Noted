@@ -2,18 +2,17 @@
 document.addEventListener('DOMContentLoaded',()=>{
 
     let pointer=document.getElementById('pointer')
-    pointer.innerText=document.getElementsByClassName('note')[0].innerText
+    pointer.innerText=document.getElementsByClassName('note')[0].value
     document.getElementById('signout').addEventListener('click',()=>{
         window.location.href='/'
     })
     document.getElementById('add').addEventListener('click', () => {
         const container = document.getElementById('my_notes');
         const notes = Array.from(container.getElementsByClassName('note'));
-        const existingNote = notes.some(note => note.textContent === 'New Note');
-    
+        const existingNote = notes.some(note => note.value === 'New Note');
         if (!existingNote) {
-            const newDiv = document.createElement('div');
-            newDiv.textContent = 'New Note';
+            const newDiv = document.createElement('input');
+            newDiv.value = 'New Note';
             newDiv.classList.add('note');
             container.appendChild(newDiv);
             document.getElementById('pointer').textContent = 'New Note';
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         .catch(e=>console.error(e))
     })
     
-    let notes = Array.from(document.getElementsByClassName('note')).map(note => note.innerHTML);
+    let notes = Array.from(document.getElementsByClassName('note')).map(note => note.value);
     notes.forEach(note => {
         document.getElementById(`${note}`).addEventListener('click',()=>{
             pointer.innerText=note;
