@@ -66,9 +66,8 @@ app.listen(process.env.PORT,()=>{
 });
 
 app.post('/grab',async(req,res)=>{
-
     const text=await GetText(req.body.file_name)
-    res.send({})
+    res.send({"text":text})
 })
 
 

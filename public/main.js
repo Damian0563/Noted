@@ -1,8 +1,8 @@
 
 document.addEventListener('DOMContentLoaded',()=>{
 
-    let pointer=document.getElementById('pointer').textContent
-    pointer=document.getElementsByClassName('note')[0].innerHTML
+    let pointer=document.getElementById('pointer')
+    pointer.innerText=document.getElementsByClassName('note')[0].innerText
     document.getElementById('signout').addEventListener('click',()=>{
         window.location.href='/'
     })
@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded',()=>{
         const file_name=document.getElementById('pointer').innerHTML
         const content=document.getElementById('input').value
         const id=document.getElementById('usr_id').value
-        console.log(content)
         fetch('/save',{
             method:"POST",
             headers:{
@@ -38,15 +37,23 @@ document.addEventListener('DOMContentLoaded',()=>{
         .catch(e=>console.error(e))
     })
     
+    let notes = Array.from(document.getElementsByClassName('note')).map(note => note.innerHTML);
+    for(note of notes){
+        document.getElementById(`${note}`).addEventListener('click',()=>{
+            pointer.innerText=note;
+        })
+    }
 
     fetch('/grab',{
         method:"POST",
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-            "file_name":pointer
+            "file_name":pointer.innerText
         })
     }).then(response=>response.json())
-    .then(data=>console.log(data))
+    .then(data=>{
+        document.getElementById('input').value=data.text;
+    })
     .catch(e=>console.error(e))
 })
 
