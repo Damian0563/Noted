@@ -25,9 +25,7 @@ async function CheckDuplicates(body){
     try{
         await mongo.connect(process.env.DB)
         const mail=body.mail
-        const username=body.username
-        await mongo.connect(process.env.DB)
-    
+        const username=body.username    
         const case1= await User.findOne({Username:username})
         const case2=await User.findOne({Email:mail})
         if(case1===null && case2===null){
@@ -107,8 +105,6 @@ async function GetNotes(id){
         return notes;
     }catch(e){
         console.error(e);
-    }finally{
-        await mongo.connection.close()
     }
 }
 

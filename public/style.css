@@ -164,3 +164,13 @@ body {
     margin:3%;
     padding: 1%;
 }
+
+
+.display{
+  position: absolute;
+  top:80%;
+  display: flex;
+  height: 30rem;
+  margin-left: 4%;
+  margin-right: 4%;
+}
