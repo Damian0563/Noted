@@ -82,8 +82,24 @@
     color: black;
     padding: 1%;
     max-width: 15%;
-    display: block; 
-    /* test  display*/
+}
+
+.edit{
+    margin-top:3%;
+    margin-right:2%;
+}
+
+.delete{
+    margin-top: 3%;
+}
+
+
+.wrapper{
+    display: flex;
+}
+
+.my_notes{
+    display: block;
 }
 
 .current_note{

@@ -18,14 +18,15 @@
             <button class="save_note" id="save">Save note</button>
         </div>
         <div class="notes" style="min-height:80vh ;">
-            <div class="note_wrapper">
                 <div class="my_notes" id="my_notes">
                     <% notes.forEach(note => { %>
-                        <!-- <div class="note" id="<%= note %>"><%= note %></div> -->
-                        <input class="note" id="<%= note %>" value="<%= note %>" readonly>
+                        <div class="wrapper">
+                            <input class="note" id="<%= note %>" value="<%= note %>" readonly>
+                            <div class="edit">EDIT</div>
+                            <div class="delete">DELETE</div>
+                        </div>
                     <% }); %>
                 </div>
-            </div>
             <div class="current_note">
                 <p class="pointer" id="pointer"></p>
                 <textarea class="note_content" id="input">
