@@ -22,8 +22,8 @@
                     <% notes.forEach(note => { %>
                         <div class="wrapper">
                             <input class="note" id="<%= note %>" value="<%= note %>" readonly>
-                            <div class="edit"><img src="edit.png" alt="edit"></div>
-                            <div class="delete"><img src="delete.png" alt="delete"></div>
+                            <div class="edit" id="edit"><img src="/edit.png" alt="edit" class="sprite"></div>
+                            <div class="delete" id="delete"><img src="/delete.png" alt="delete" class="sprite"></div>
                         </div>
                     <% }); %>
                 </div>

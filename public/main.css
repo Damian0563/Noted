@@ -85,12 +85,12 @@
 }
 
 .edit{
-    margin-top:3%;
+    margin-top:2%;
     margin-right:2%;
 }
 
 .delete{
-    margin-top: 3%;
+    margin-top: 2%;
 }
 
 
@@ -104,10 +104,10 @@
 
 .current_note{
     background-color: white;
-    left:28%;
+    left:27%;
     position: absolute;
     color: black;
-    min-width: 60%;
+    min-width: 64%;
     min-height: 75%;
     max-height: 80%;
     padding: 1%;
@@ -136,4 +136,9 @@
 
 .save_note:hover{
     opacity: 0.75;
+}
+
+.sprite{
+    width:3rem;
+    height: 3rem;
 }
