@@ -72,6 +72,7 @@ app.post('/grab',async(req,res)=>{
 
 app.post('/delete',async(req,res)=>{
     await DeleteNote(req.body)
+    console.log(`Note ${req.body.delete} deleted successfuly`)
     res.status(200).send({message:`Note ${req.body.delete} deleted successfuly`})
 })
 

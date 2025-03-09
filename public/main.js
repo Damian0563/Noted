@@ -11,13 +11,41 @@ document.addEventListener('DOMContentLoaded',()=>{
         const notes = Array.from(container.getElementsByClassName('note'));
         const existingNote = notes.some(note => note.value === 'New Note');
         if (!existingNote) {
-            const newDiv = document.createElement('input');
-            newDiv.value = 'New Note';
-            newDiv.classList.add('note');
+            const newDiv = document.createElement('div');
+            newDiv.classList.add('wrapper');
+
+            const newNoteInput = document.createElement('input');
+            newNoteInput.classList.add('note');
+            newNoteInput.value = 'New Note';  // Set the default value for the note
+            newNoteInput.id = 'new-note-id';  // Unique id for the note input, you may change as needed
+            newNoteInput.readOnly = true;  // Make the note input read-only initially
+
+            const editButton = document.createElement('div');
+            editButton.classList.add('edit');
+            editButton.id = 'new-note-id-edit';  // Unique id for the edit button
+            const editIcon = document.createElement('img');
+            editIcon.src = '/edit.png';  // Edit icon source
+            editIcon.alt = 'edit';
+            editIcon.classList.add('sprite');
+            editButton.appendChild(editIcon);
+
+            const deleteButton = document.createElement('div');
+            deleteButton.classList.add('delete');
+            deleteButton.id = 'new-note-id-delete';  // Unique id for the delete button
+            const deleteIcon = document.createElement('img');
+            deleteIcon.src = '/delete.png';  // Delete icon source
+            deleteIcon.alt = 'delete';
+            deleteIcon.classList.add('sprite');
+            deleteButton.appendChild(deleteIcon);
+
+            newDiv.appendChild(newNoteInput);
+            newDiv.appendChild(editButton);
+            newDiv.appendChild(deleteButton);
             container.appendChild(newDiv);
-            document.getElementById('pointer').textContent = 'New Note';
-            pointer.innerText='New Note';
-            document.getElementById('input').value=''
+            const pointer = document.getElementById('pointer');
+            pointer.textContent = 'New Note';
+            const inputField = document.getElementById('input');
+            inputField.value = '';
         }
     });
     document.getElementById('save').addEventListener('click',()=>{

@@ -150,11 +150,9 @@ async function GetText(name){
 async function DeleteNote(body){
     try{
         await mongo.connect(process.env.DB)
-        console.log(body.id)
-        username=await User.findOne({"_id":body.id}).Username
-        console.log(username)
+        username=await User.findOne({"_id":body.id})
         await Note.updateOne(
-            { Username: username },
+            { Username: username.Username },
             { $pull: { Notes: { Name: body.delete } } }
         );
     }catch(e){

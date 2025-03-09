@@ -97,7 +97,7 @@
     border: 0.1rem solid black;
     margin: 2%;
     color: black;
-    padding: 1%;
+    padding: 3%;
     max-width: 60%; /* Allow more room for other elements */
     flex-grow: 1; /* Allows it to expand within wrapper */
 }
