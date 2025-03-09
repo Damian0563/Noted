@@ -147,6 +147,20 @@ async function GetText(name){
     }
 }
 
+async function DeleteNote(body){
+    try{
+        await mongo.connect(process.env.DB)
+        console.log(body.id)
+        username=await User.findOne({"_id":body.id}).Username
+        console.log(username)
+        await Note.updateOne(
+            { Username: username },
+            { $pull: { Notes: { Name: body.delete } } }
+        );
+    }catch(e){
+        console.error(e)
+    }
+} 
 
 module.exports={
     CheckDuplicates,
@@ -155,5 +169,6 @@ module.exports={
     GetIdByName,
     GetNotes,
     SaveNote,
-    GetText
+    GetText,
+    DeleteNote,
 }

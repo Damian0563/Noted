@@ -1,5 +1,5 @@
 require('dotenv').config()
-const {CheckDuplicates,SaveUser,VerifyCredentials,GetIdByName,GetNotes,SaveNote,GetText}=require('./database.js')
+const {CheckDuplicates,SaveUser,VerifyCredentials,GetIdByName,GetNotes,SaveNote,GetText,DeleteNote}=require('./database.js')
 const express=require('express');
 const path=require('path')
 const app=express();
@@ -43,7 +43,7 @@ app.get('/noted/:id',async (req,res)=>{
     notes=await GetNotes(req.params.id);
     let names=[]
     for(note of notes){
-        names.push(note.Notes[0].Name)
+        if(note.Notes.length!==0) names.push(note.Notes[0].Name)
     }
     res.render('main.ejs',{notes:names,id:req.params.id})
 })
@@ -70,7 +70,10 @@ app.post('/grab',async(req,res)=>{
     res.send({"text":text})
 })
 
-
+app.post('/delete',async(req,res)=>{
+    await DeleteNote(req.body)
+    res.status(200).send({message:`Note ${req.body.delete} deleted successfuly`})
+})
 
 async function CheckMailValidity(mail){
     const result=await email_validator.validate(mail)

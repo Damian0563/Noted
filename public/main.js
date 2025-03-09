@@ -54,11 +54,23 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
             .catch(e=>console.error(e))
         })
-        document.getElementById(`${note}edit`).addEventListener('click',()=>{
-            console.log('Edit clicked')
+        let edit=document.getElementById(`${note}edit`)
+        let delet=document.getElementById(`${note}delete`)
+        edit.addEventListener('click',()=>{
+            document.getElementById(`${note}`).style.readonly=false;
         })
-        document.getElementById(`${note}delete`).addEventListener('click',()=>{
-            console.log('Delete clicked')
+
+        delet.addEventListener('click',()=>{
+            fetch('/delete',{
+                method:"POST",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({
+                    "delete": note,
+                    "id": document.getElementById('usr_id').value,
+                })
+            }).then(response=>response.json())
+            .then(data=>data)
+            .catch(e=>console.error(e))
         })
     });
 
