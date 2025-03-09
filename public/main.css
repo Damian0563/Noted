@@ -63,70 +63,82 @@
     opacity:0.75 ;
 }
 
-.notes{
-    display: grid;
+.notes {
+    display: flex;
+    flex-wrap: wrap; /* Prevents elements from overlapping */
+    justify-content: space-between;
     margin-top: 18%;
     margin-left: 2%;
     margin-right: 4%;
     margin-bottom: 7%;
     padding: 2%;
-    width:90%;
+    width: 90%;
     border: 1rem solid white;
     border-radius: 10%;
 }
 
-.note{
+/* Ensuring my_notes and current_note are side by side properly */
+.my_notes {
+    width: 30%; /* Give it a reasonable width */
+    min-width: auto;
+    display: block;
+    margin-bottom: 4%;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center; /* Aligns items properly */
+    justify-content: space-between; /* Ensures spacing between elements */
+    gap: 5px; /* Small spacing */
+}
+
+.note {
     background-color: white;
     border: 0.1rem solid black;
-    margin:2%;
+    margin: 2%;
     color: black;
     padding: 1%;
-    max-width: 15%;
+    max-width: 60%; /* Allow more room for other elements */
+    flex-grow: 1; /* Allows it to expand within wrapper */
 }
 
-.edit{
-    margin-top:2%;
-    margin-right:2%;
-}
-
-.delete{
+.edit,
+.delete {
     margin-top: 2%;
+    margin-right: 2%;
+    cursor: pointer; /* Add cursor to indicate interactivity */
 }
 
-
-.wrapper{
-    display: flex;
+.sprite {
+    width: 3rem;
+    height: 3rem;
 }
 
-.my_notes{
-    display: block;
-}
-
-.current_note{
+.current_note {
     background-color: white;
-    left:27%;
-    position: absolute;
     color: black;
     min-width: 64%;
+    max-width: 70%;
     min-height: 75%;
     max-height: 80%;
     padding: 1%;
+    position: relative; /* Changed from absolute */
 }
 
-.note_content{
+.note_content {
     resize: none;
-    width:90%;
-    min-height:35rem;
+    width: 90%;
+    min-height: 35rem;
     padding: 5%;
 }
 
-.pointer{
+.pointer {
     color: gray;
     background-color: white;
     margin: 0.5%;
 }
 
-.save_note{
+.save_note {
     background-color: chartreuse;
     color: white;
     border: 1rem solid chartreuse;
@@ -134,11 +146,48 @@
     transition: 0.5s ease;
 }
 
-.save_note:hover{
+.save_note:hover {
     opacity: 0.75;
 }
 
-.sprite{
-    width:3rem;
-    height: 3rem;
+/* Responsive Fix for Smaller Screens */
+@media (max-width: 1300px) {
+    .notes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .my_notes {
+        width: 90%;
+    }
+
+    .current_note {
+        width: 90%;
+        min-width: auto;
+        position: relative;
+        left: auto;
+    }
+
+    .wrapper {
+        flex-wrap: wrap; /* Allow items to stack if necessary */
+    }
+
+    .note {
+        max-width: 70%;
+    }
+}
+
+@media(max-width:1800px){
+
+    .upper_lower{
+        top:8%;
+    }
+}
+
+
+@media(max-width:1150px){
+    .upper_lower{
+        top:5%;
+        left: 20%;
+    }
 }

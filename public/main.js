@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
             .catch(e=>console.error(e))
         })
+        document.getElementById(`${note}edit`).addEventListener('click',()=>{
+            console.log('Edit clicked')
+        })
+        document.getElementById(`${note}delete`).addEventListener('click',()=>{
+            console.log('Delete clicked')
+        })
     });
 
     fetch('/grab',{
