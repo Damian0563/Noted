@@ -1,5 +1,5 @@
 require('dotenv').config()
-const {CheckDuplicates,SaveUser,VerifyCredentials,GetIdByName,GetNotes,SaveNote,GetText,DeleteNote}=require('./database.js')
+const {CheckDuplicates,SaveUser,VerifyCredentials,GetIdByName,GetNotes,SaveNote,GetText,DeleteNote,UpdateNote}=require('./database.js')
 const express=require('express');
 const path=require('path')
 const app=express();
@@ -69,6 +69,13 @@ app.post('/grab',async(req,res)=>{
     const text=await GetText(req.body.file_name)
     res.send({"text":text})
 })
+
+
+app.post('/update', async(req,res)=>{
+    await UpdateNote(req.body);
+    res.status(200).send({message: "Success"})
+})
+
 
 app.post('/delete',async(req,res)=>{
     await DeleteNote(req.body)

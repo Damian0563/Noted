@@ -1,3 +1,4 @@
+const { response } = require("express")
 
 document.addEventListener('DOMContentLoaded',()=>{
 
@@ -85,8 +86,37 @@ document.addEventListener('DOMContentLoaded',()=>{
         let edit=document.getElementById(`${note}edit`)
         let delet=document.getElementById(`${note}delete`)
         edit.addEventListener('click',()=>{
-            console.log("edit")
-            document.getElementById(`${note}`).style.readonly=false;
+            const old=document.getElementById(`${note}`).value
+            document.getElementById(`${note}`).removeAttribute("readOnly");
+            document.getElementById(`edit${note}`).src='/save.png'
+            edit.addEventListener('click',()=>{
+                pointer.innerText=document.getElementById(`${note}`).value
+                document.getElementById(`${note}`).setAttribute("readOnly","true");
+                document.getElementById(`edit${note}`).src='/edit.png'
+                const usr_id=document.getElementById('usr_id').value
+                fetch('/update',{
+                    method:"POST",
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({
+                        new:pointer.innerText,
+                        old:old,
+                        id:usr_id,
+                    })
+                }).then(response=>response.json())
+                .catch(e=>console.error(e))
+
+                fetch('/grab',{
+                    method:"POST",
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({
+                        "file_name":pointer.innerText
+                    })
+                }).then(response=>response.json())
+                .then(data=>{
+                    document.getElementById('input').value=data.text;
+                })
+                .catch(e=>console.error(e))
+            })
         })
 
         delet.addEventListener('click',()=>{

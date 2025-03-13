@@ -160,6 +160,20 @@ async function DeleteNote(body){
     }
 } 
 
+async function UpdateNote(body){
+    try{
+        await mongo.connect(process.env.DB)
+        username=await User.findOne({"_id":body.id}).Username
+        await Note.findOneAndUpdate(
+            { Username: username, "Notes.Name": body.old },
+            { $set: { "Notes.$.Name": body.new } },
+            { new: true }
+        );
+        console.log("File name updated")
+    }catch(e){console.error(e)}
+    finally{ await mongo.connection.close()}
+}
+
 module.exports={
     CheckDuplicates,
     SaveUser,
@@ -169,4 +183,5 @@ module.exports={
     SaveNote,
     GetText,
     DeleteNote,
+    UpdateNote
 }
