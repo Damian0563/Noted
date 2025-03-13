@@ -45,18 +45,16 @@ document.addEventListener('DOMContentLoaded',()=>{
                 })
             }).then(response=>{
                 if(!response.ok){
-                    throw new Error('Invalid request')
+                    document.getElementById('popup').style.display='grid'
+                    document.getElementById('x').addEventListener('click',()=>{
+                        document.getElementById('popup').style.display='none'
+                    })
                 }
                 return response.json()
             })
             .then(data=>{
                 if(data.id!==undefined){
                     window.location.href=`/noted/${data.id}`
-                }else{
-                    document.getElementById('popup').style.display='none'
-                    document.getElementById('x').addEventListener('click',()=>{
-                        document.getElementById('popup').style.display='grid'
-                    })
                 }
             })
             .catch(e=>console.error(e))
