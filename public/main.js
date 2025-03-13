@@ -1,9 +1,6 @@
-const { response } = require("express")
-
 document.addEventListener('DOMContentLoaded',()=>{
 
-    let pointer=document.getElementById('pointer')
-    pointer.innerText=document.getElementsByClassName('note')[0].value
+    
     document.getElementById('signout').addEventListener('click',()=>{
         window.location.href='/'
     })
@@ -49,6 +46,8 @@ document.addEventListener('DOMContentLoaded',()=>{
             inputField.value = '';
         }
     });
+    let pointer=document.getElementById('pointer')
+    pointer.innerText=document.getElementsByClassName('note')[0].value
     document.getElementById('save').addEventListener('click',()=>{
         const file_name=document.getElementById('pointer').innerHTML
         const content=document.getElementById('input').value

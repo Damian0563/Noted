@@ -100,39 +100,15 @@ async function GetIdByName(mail) {
 async function GetNotes(id){
     try{
         await mongo.connect(process.env.DB)
-        username=await User.findOne({"_id":id}).Username
-        notes=await Note.find({"Username":username})
+        username=await User.findOne({"_id":id})
+        notes=await Note.find({"Username":username.Username})
         return notes;
     }catch(e){
         console.error(e);
     }
 }
 
-async function SaveNote(body){
-    try{
-        await mongo.connect(process.env.DB)
-        username=await User.findOne({"_id":body.id}).Username
-        update= await Note.findOne({"Username":username,"Name":body.file_name})
-        if(!update){
-            const saved=new Note({
-                Username:username,
-                Notes:[
-                    {
-                        Name:body.file_name,
-                        Content:body.content,
-                    }
-                ]
-            })
-            await saved.save()
-        }else{
-            await Note.updateOne({Username:username},{$set:{Content:body.content,Date:new Date()}})
-        }
-    }catch(e){
-        console.error(e);
-    }finally{
-        await mongo.connection.close()
-    }
-}
+
 
 async function GetText(name){
     try{
@@ -151,8 +127,10 @@ async function DeleteNote(body){
     try{
         await mongo.connect(process.env.DB)
         username=await User.findOne({"_id":body.id})
-        await Note.updateOne(
-            { Username: username.Username },
+        const noteExists = await Note.findOne({ Username: username.Username, "Notes.Name": body.delete});
+        //console.log("Note Exists:", noteExists);
+        const result = await Note.updateOne(
+            { Username: username.Username, "Notes.Name": body.delete },
             { $pull: { Notes: { Name: body.delete } } }
         );
     }catch(e){
@@ -163,16 +141,51 @@ async function DeleteNote(body){
 async function UpdateNote(body){
     try{
         await mongo.connect(process.env.DB)
-        username=await User.findOne({"_id":body.id}).Username
-        await Note.findOneAndUpdate(
-            { Username: username, "Notes.Name": body.old },
+        const username=await User.findOne({"_id":body.id})
+        const res=await Note.findOneAndUpdate(
+            { Username: username.Username, "Notes.Name": body.old },
             { $set: { "Notes.$.Name": body.new } },
             { new: true }
         );
-        console.log("File name updated")
     }catch(e){console.error(e)}
-    finally{ await mongo.connection.close()}
 }
+
+
+async function SaveNote(body){
+    try{
+        await mongo.connect(process.env.DB)
+        username=await User.findOne({"_id":body.id})
+        update= await Note.findOne({"Username":username.Username,"Name":body.file_name})
+        if(update===null){
+            const saved=new Note({
+                Username:username.Username,
+                Notes:[
+                    {
+                        Name:body.file_name,
+                        Content:body.content,
+                    }
+                ]
+            })
+            await saved.save()
+        }else{
+            await Note.updateOne(
+                { 
+                    Username: username.Username, 
+                    "Notes.Name": body.file_name 
+                },
+                { 
+                    $set: { "Notes.$.Content": body.content }
+                }
+            );
+            
+        }
+    }catch(e){
+        console.error(e);
+    }finally{
+        await mongo.connection.close()
+    }
+}
+
 
 module.exports={
     CheckDuplicates,

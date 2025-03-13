@@ -61,10 +61,6 @@ app.post('/save',async(req,res)=>{
     res.status(200).send({message:"Success"})
 })
 
-app.listen(process.env.PORT,()=>{
-    console.log('Server running on port',process.env.PORT)
-});
-
 app.post('/grab',async(req,res)=>{
     const text=await GetText(req.body.file_name)
     res.send({"text":text})
@@ -82,6 +78,13 @@ app.post('/delete',async(req,res)=>{
     console.log(`Note ${req.body.delete} deleted successfuly`)
     res.status(200).send({message:`Note ${req.body.delete} deleted successfuly`})
 })
+
+
+
+
+app.listen(process.env.PORT,()=>{
+    console.log('Server running on port',process.env.PORT)
+});
 
 async function CheckMailValidity(mail){
     const result=await email_validator.validate(mail)
