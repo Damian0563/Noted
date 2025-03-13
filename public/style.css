@@ -174,3 +174,21 @@ body {
   margin-left: 4%;
   margin-right: 4%;
 }
+
+.popup{
+    display: none;
+    position: absolute;
+    padding: 3%;
+    top:15%;
+}
+
+.x{
+    width:15%;
+    height: 10%;
+}
+
+.message{
+    font-size: x-large;
+    justify-content: center;
+    align-items: center;
+}

@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         let edit=document.getElementById(`${note}edit`)
         let delet=document.getElementById(`${note}delete`)
         edit.addEventListener('click',()=>{
+            console.log("edit")
             document.getElementById(`${note}`).style.readonly=false;
         })
 

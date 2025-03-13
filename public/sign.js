@@ -53,7 +53,10 @@ document.addEventListener('DOMContentLoaded',()=>{
                 if(data.id!==undefined){
                     window.location.href=`/noted/${data.id}`
                 }else{
-                    console.log('error')
+                    document.getElementById('popup').style.display='none'
+                    document.getElementById('x').addEventListener('click',()=>{
+                        document.getElementById('popup').style.display='grid'
+                    })
                 }
             })
             .catch(e=>console.error(e))
