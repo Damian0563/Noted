@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     });
     let pointer=document.getElementById('pointer')
-    pointer.innerText=document.getElementsByClassName('note')[0].value
+    pointer.innerText=document.getElementsByClassName('note')[0].id
     document.getElementById('save').addEventListener('click',()=>{
         const file_name=document.getElementById('pointer').innerHTML
         const content=document.getElementById('input').value
@@ -66,10 +66,10 @@ document.addEventListener('DOMContentLoaded',()=>{
         .catch(e=>console.error(e))
     })
     
-    let notes = Array.from(document.getElementsByClassName('note')).map(note => note.value);
+    let notes = Array.from(document.getElementsByClassName('note')).map(note => note.id);
     notes.forEach(note => {
         document.getElementById(`${note}`).addEventListener('click',()=>{
-            pointer.innerText=note;
+            pointer.innerText=document.getElementById(`${note}`).value;
             fetch('/grab',{
                 method:"POST",
                 headers:{'Content-Type':'application/json'},
@@ -92,6 +92,11 @@ document.addEventListener('DOMContentLoaded',()=>{
                 pointer.innerText=document.getElementById(`${note}`).value
                 document.getElementById(`${note}`).setAttribute("readOnly","true");
                 document.getElementById(`edit${note}`).src='/edit.png'
+
+                //document.getElementById(`${note})`).value=pointer.innerText
+                document.getElementById(`${note}`).id=pointer.innerText
+                
+                document.getElementById(`edit${note}`).id=`edit${pointer.innerText}`
                 const usr_id=document.getElementById('usr_id').value
                 fetch('/update',{
                     method:"POST",
@@ -104,17 +109,6 @@ document.addEventListener('DOMContentLoaded',()=>{
                 }).then(response=>response.json())
                 .catch(e=>console.error(e))
 
-                fetch('/grab',{
-                    method:"POST",
-                    headers:{'Content-Type':'application/json'},
-                    body:JSON.stringify({
-                        "file_name":pointer.innerText
-                    })
-                }).then(response=>response.json())
-                .then(data=>{
-                    document.getElementById('input').value=data.text;
-                })
-                .catch(e=>console.error(e))
             })
         })
 
