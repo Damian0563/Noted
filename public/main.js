@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded',()=>{
             const newNoteInput = document.createElement('input');
             newNoteInput.classList.add('note');
             newNoteInput.value = 'New Note';  // Set the default value for the note
-            newNoteInput.id = 'new-note-id';  // Unique id for the note input, you may change as needed
+            newNoteInput.id = 'New Note';  // Unique id for the note input, you may change as needed
             newNoteInput.readOnly = true;  // Make the note input read-only initially
 
             const editButton = document.createElement('div');
             editButton.classList.add('edit');
-            editButton.id = 'new-note-id-edit';  // Unique id for the edit button
+            editButton.id = 'New Noteedit';  // Unique id for the edit button
             const editIcon = document.createElement('img');
             editIcon.src = '/edit.png';  // Edit icon source
             editIcon.alt = 'edit';
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
             const deleteButton = document.createElement('div');
             deleteButton.classList.add('delete');
-            deleteButton.id = 'new-note-id-delete';  // Unique id for the delete button
+            deleteButton.id = 'New Noteddelete';  // Unique id for the delete button
             const deleteIcon = document.createElement('img');
             deleteIcon.src = '/delete.png';  // Delete icon source
             deleteIcon.alt = 'delete';
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                     })
                 }).then(response=>response.json())
                 .catch(e=>console.error(e))
-
+                window.location.href=window.location.href
             })
         })
 

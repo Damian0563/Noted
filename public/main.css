@@ -130,6 +130,7 @@
     width: 90%;
     min-height: 35rem;
     padding: 5%;
+    font-size: 1.5rem;
 }
 
 .pointer {
@@ -149,6 +150,67 @@
 .save_note:hover {
     opacity: 0.75;
 }
+
+
+.talk{
+    display: block;
+    flex-wrap: wrap; /* Prevents elements from overlapping */
+    justify-content: space-between;
+    margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 4%;
+    margin-bottom: 7%;
+    padding: 2%;
+    width: 90%;
+    border: 0.4rem solid white;
+    height: 50vh; 
+    overflow-y: hidden;
+}
+
+.prompt{
+    background-color: white;
+    border: 1rem solid white;
+    border-radius: 8%;
+    color:black;
+    display: grid;
+    padding: 1%;
+    margin-left: 18%;
+    margin-right:8%;
+    height: 10%;
+    position: absolute;
+    top:180%;
+    width:50% ;
+    
+}
+
+.response{
+    background-color: blueviolet;
+    border: 1rem solid blueviolet;
+    float: right;
+    width:50%;
+    margin-left: 3%;
+    margin-right:3%;
+    padding: 1%;
+    display: none;
+    border-radius:8%;
+    color: white;
+}
+
+
+.question{
+    background-color: white;
+}
+
+.submit{
+    background-color: white;
+}
+
+.prompt_input{
+    resize: none;
+    width:90%;
+    height: 5rem;
+}
+
 
 /* Responsive Fix for Smaller Screens */
 @media (max-width: 1300px) {
