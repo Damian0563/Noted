@@ -172,7 +172,7 @@
     border: 1rem solid white;
     border-radius: 8%;
     color:black;
-    display: grid;
+    display: flexbox;
     padding: 1%;
     margin-left: 18%;
     margin-right:8%;
@@ -202,13 +202,21 @@
 }
 
 .submit{
+    float: right;
+    /* margin-left:95% ; */
     background-color: white;
+}
+
+.submitBtn{
+    height: 2.5rem;
+    background-color: white;
+    width: 2.5rem;
 }
 
 .prompt_input{
     resize: none;
     width:90%;
-    height: 5rem;
+    height: 6.5rem;
 }
 
 

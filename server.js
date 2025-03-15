@@ -4,10 +4,13 @@ const express=require('express');
 const path=require('path')
 const app=express();
 const email_validator=require('deep-email-validator')
+const OpenAI=require("openai")
 app.set('view engine','ejs')
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+
+
 
 app.get('/',(req,res)=>{
     res.render('landing_page.ejs')
@@ -80,6 +83,19 @@ app.post('/delete',async(req,res)=>{
 })
 
 
+app.post('/chat', async(req,res)=>{
+    const completion = await client.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+            {
+                role: "user",
+                content: req.body.prompt,
+            },
+        ],
+    });
+    const result = completion.choices[0].message.content
+    res.status(200).send({message:result})
+})
 
 
 app.listen(process.env.PORT,()=>{

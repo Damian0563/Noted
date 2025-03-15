@@ -1,6 +1,8 @@
+import OpenAI from "openai";
+const client = new OpenAI();
+
 document.addEventListener('DOMContentLoaded',()=>{
 
-    
     document.getElementById('signout').addEventListener('click',()=>{
         window.location.href='/'
     })
@@ -125,6 +127,13 @@ document.addEventListener('DOMContentLoaded',()=>{
             .catch(e=>console.error(e))
         })
     });
+
+    document.getElementById('submit').addEventListener('click',()=>{
+        const question=document.getElementById('prompt_input').value
+    })
+
+
+
 
     fetch('/grab',{
         method:"POST",
