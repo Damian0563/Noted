@@ -4,7 +4,9 @@ const express=require('express');
 const path=require('path')
 const app=express();
 const email_validator=require('deep-email-validator')
-const OpenAI=require("openai")
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 app.set('view engine','ejs')
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
@@ -84,17 +86,8 @@ app.post('/delete',async(req,res)=>{
 
 
 app.post('/chat', async(req,res)=>{
-    const completion = await client.chat.completions.create({
-        model: "gpt-4o",
-        messages: [
-            {
-                role: "user",
-                content: req.body.prompt,
-            },
-        ],
-    });
-    const result = completion.choices[0].message.content
-    res.status(200).send({message:result})
+    const result=await model.generateContent(req.body.content);
+    res.status(200).send({message:result.response.text()})
 })
 
 

@@ -1,5 +1,3 @@
-import OpenAI from "openai";
-const client = new OpenAI();
 
 document.addEventListener('DOMContentLoaded',()=>{
 
@@ -130,6 +128,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     document.getElementById('submit').addEventListener('click',()=>{
         const question=document.getElementById('prompt_input').value
+        fetch('/chat',{
+            method:"POST",
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({"content":question})
+        }).then(response=>response.json())
+        .then(data=>{
+            document.getElementById('response').value=data.text
+        })
+        .catch(e=>console.error(e))
     })
 
 

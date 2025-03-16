@@ -1,11 +1,11 @@
 {
   "dependencies": {
+    "@google/generative-ai": "^0.24.0",
     "bcrypt": "^5.1.1",
     "deep-email-validator": "^0.1.21",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "mongoose": "^8.11.0",
-    "openai": "^4.87.3"
+    "mongoose": "^8.11.0"
   }
 }
