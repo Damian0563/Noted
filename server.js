@@ -87,6 +87,7 @@ app.post('/delete',async(req,res)=>{
 
 app.post('/chat', async(req,res)=>{
     const result=await model.generateContent(req.body.content);
+    // console.log(result.response.text())
     res.status(200).send({message:result.response.text()})
 })
 

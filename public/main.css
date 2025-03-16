@@ -159,12 +159,11 @@
     margin-top: 3%;
     margin-left: 2%;
     margin-right: 4%;
-    margin-bottom: 7%;
+    margin-bottom: 2%;
     padding: 2%;
     width: 90%;
     border: 0.4rem solid white;
-    height: 50vh; 
-    overflow-y: hidden;
+    height: 60vh; 
 }
 
 .prompt{
@@ -176,10 +175,9 @@
     padding: 1%;
     margin-left: 18%;
     margin-right:8%;
-    height: 10%;
-    position: absolute;
-    top:180%;
-    width:50% ;
+    margin-bottom: 10%;
+    height: 8%;
+    width:50%;
     
 }
 
@@ -191,14 +189,28 @@
     margin-left: 3%;
     margin-right:3%;
     padding: 1%;
-    display: none;
+    display: flex;
     border-radius:8%;
     color: white;
+}
+
+.me{
+    background-color: white;
+    border: 1rem solid white;
+    float: left;
+    width:50%;
+    margin-left: 3%;
+    margin-right:3%;
+    padding: 1%;
+    display: flex;
+    border-radius:8%;
+    color: black;
 }
 
 
 .question{
     background-color: white;
+    height: auto;
 }
 
 .submit{
@@ -216,7 +228,8 @@
 .prompt_input{
     resize: none;
     width:90%;
-    height: 6.5rem;
+    height: 4.5rem;
+    padding: 1%;
 }
 
 

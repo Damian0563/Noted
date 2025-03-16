@@ -128,13 +128,24 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     document.getElementById('submit').addEventListener('click',()=>{
         const question=document.getElementById('prompt_input').value
+        document.getElementById('prompt_input').value=''
         fetch('/chat',{
             method:"POST",
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({"content":question})
         }).then(response=>response.json())
-        .then(data=>{
-            document.getElementById('response').value=data.text
+        .then(data=>{ 
+            // document.getElementById('response').innerText=data.message
+            // document.getElementById('me').innerText=question
+            let prompt=document.createElement('div')
+            prompt.classList.add('me')
+            prompt.innerText=question
+            document.getElementById('talk').appendChild(prompt)
+
+            let answer=document.createElement('div')
+            answer.classList.add('response')
+            answer.innerText=data.message
+            document.getElementById('talk').appendChild(answer)
         })
         .catch(e=>console.error(e))
     })
