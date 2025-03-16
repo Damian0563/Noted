@@ -152,19 +152,7 @@
 }
 
 
-.talk{
-    display: block;
-    flex-wrap: wrap; /* Prevents elements from overlapping */
-    justify-content: space-between;
-    margin-top: 3%;
-    margin-left: 2%;
-    margin-right: 4%;
-    margin-bottom: 2%;
-    padding: 2%;
-    width: 90%;
-    border: 0.4rem solid white;
-    height: 60vh; 
-}
+
 
 .prompt{
     background-color: white;
@@ -181,30 +169,40 @@
     
 }
 
-.response{
-    background-color: blueviolet;
-    border: 1rem solid blueviolet;
-    float: right;
-    width:50%;
-    margin-left: 3%;
-    margin-right:3%;
-    padding: 1%;
+.talk {
     display: flex;
-    border-radius:8%;
+    flex-direction: column; /* Stack messages */
+    align-items: flex-start; /* Align messages properly */
+    margin: 3% 4% 2% 2%;
+    padding: 2%;
+    width: 90%;
+    border: 0.4rem solid white;
+    height: 60vh;
+    overflow-y: auto; /* Allows scrolling */
+    position: relative;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}
+
+/* Ensuring messages wrap inside properly */
+.response, .me {
+    max-width: 75%; /* Prevents overflow */
+    padding: 10px;
+    border-radius: 8px;
+    word-wrap: break-word;
+}
+
+/* Adjusted positioning for chat bubbles */
+.response {
+    align-self: flex-end;
+    background-color: blueviolet;
     color: white;
 }
 
-.me{
-    background-color: white;
-    border: 1rem solid white;
-    float: left;
-    width:50%;
-    margin-left: 3%;
-    margin-right:3%;
-    padding: 1%;
-    display: flex;
-    border-radius:8%;
-    color: black;
+.me {
+    align-self: flex-start;
+    background-color: black;
+    color: white;
 }
 
 
@@ -223,6 +221,13 @@
     height: 2.5rem;
     background-color: white;
     width: 2.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.submitBtn:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 .prompt_input{

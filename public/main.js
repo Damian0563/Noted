@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                     "id": document.getElementById('usr_id').value,
                 })
             }).then(response=>response.json())
-            .then(data=>data)
+            .then(window.location.href=window.location.href)
             .catch(e=>console.error(e))
         })
     });
@@ -135,8 +135,6 @@ document.addEventListener('DOMContentLoaded',()=>{
             body:JSON.stringify({"content":question})
         }).then(response=>response.json())
         .then(data=>{ 
-            // document.getElementById('response').innerText=data.message
-            // document.getElementById('me').innerText=question
             let prompt=document.createElement('div')
             prompt.classList.add('me')
             prompt.innerText=question
