@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
         }).then(response=>response.json())
         .catch(e=>console.error(e))
+        window.location.href=window.location.href
     })
     
     let notes = Array.from(document.getElementsByClassName('note')).map(note => note.id);
