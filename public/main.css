@@ -237,6 +237,23 @@
     padding: 1%;
 }
 
+#assistant{
+    display: flex;
+    margin-left: 5%;
+    margin-right:5%;
+}
+
+.assistance{
+    font-size: 2.5rem;
+    color:  white;
+    font-weight: bold;  
+}
+
+.assist{
+    font-size: 2.5rem;
+    color:  blueviolet;
+    font-weight: bold;  
+}
 
 /* Responsive Fix for Smaller Screens */
 @media (max-width: 1300px) {
