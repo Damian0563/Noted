@@ -78,8 +78,13 @@ app.post('/sign_in', async(req,res)=>{
 })
 
 app.post('/save',async(req,res)=>{
-    SaveNote(req.body)
-    res.status(200).send({message:"Success"})
+    // SaveNote(req.body)
+    // res.status(200).send({message:"Success"})
+    if (!req.session.userId) {
+        return res.status(401).json({ message: "Unauthorized - Please sign in" });
+    }
+    await SaveNote({ ...req.body, userId: req.session.userId });
+    res.status(200).json({ message: "Success" });
 })
 
 app.post('/grab',async(req,res)=>{
@@ -95,10 +100,25 @@ app.post('/update', async(req,res)=>{
 
 
 app.post('/delete',async(req,res)=>{
-    await DeleteNote(req.body)
-    console.log(`Note ${req.body.delete} deleted successfuly`)
-    res.status(200).send({message:`Note ${req.body.delete} deleted successfuly`})
+    // await DeleteNote(req.body)
+    // console.log(`Note ${req.body.delete} deleted successfuly`)
+    // res.status(200).send({message:`Note ${req.body.delete} deleted successfuly`})
+    if (!req.session.userId) {
+        return res.status(401).json({ message: "Unauthorized - Please sign in" });
+    }
+    await DeleteNote({ ...req.body, userId: req.session.userId });
+    res.status(200).json({ message: `Note ${req.body.delete} deleted successfully` });
 })
+
+app.post('/signout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: "Error signing out" });
+        }
+        res.clearCookie('connect.sid'); // Removes session cookie
+        res.status(200).json({ message: "Signed out successfully" });
+    });
+});
 
 
 app.post('/chat', async(req,res)=>{

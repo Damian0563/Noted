@@ -1,8 +1,20 @@
 
 document.addEventListener('DOMContentLoaded',()=>{
 
-    document.getElementById('signout').addEventListener('click',()=>{
-        window.location.href='/'
+    document.getElementById('signout').addEventListener('click',async()=>{
+        try{
+            const response=await fetch('/signout',{
+                method:"POST",
+                headers:{'Content-Type':'application/json'}
+            }).then(response=>response.json())
+            console.log(response.status)
+            if(response.ok){
+                localStorage.removeItem('userId');
+                window.location.href='/'
+            }
+        }catch(e){
+            console.error(e)
+        }
     })
     document.getElementById('add').addEventListener('click', () => {
         const container = document.getElementById('my_notes');
