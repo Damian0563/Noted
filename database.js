@@ -1,3 +1,5 @@
+const e = require('express')
+
 bcrypt=require('bcrypt')
 mongo=require('mongoose')
 require ('dotenv').config()
@@ -114,7 +116,11 @@ async function GetText(name){
     try{
         await mongo.connect(process.env.DB)
         const query=await Note.findOne({"Notes.Name":name});
-        const text=query.Notes.find(note => note.Name === name).Content
+        try{
+            const text=query.Notes.find(note => note.Name === name).Content
+        }catch(e){
+            return '';
+        }
         return text
     }catch(e){
         console.error(e)

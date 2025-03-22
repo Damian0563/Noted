@@ -1,6 +1,11 @@
 
 document.addEventListener('DOMContentLoaded',()=>{
-
+    try{
+        let pointer=document.getElementById('pointer')
+        pointer.innerText=document.getElementsByClassName('note')[0].id
+    }catch(e){
+        document.getElementById('input').value='';
+    }
     document.getElementById('signout').addEventListener('click',async()=>{
         try{
             const response=await fetch('/signout',{
@@ -57,12 +62,6 @@ document.addEventListener('DOMContentLoaded',()=>{
             inputField.value = '';
         }
     });
-    try{
-        let pointer=document.getElementById('pointer')
-        pointer.innerText=document.getElementsByClassName('note')[0].id
-    }catch(e){
-        console.error(e)
-    }
     document.getElementById('save').addEventListener('click',async()=>{
         const file_name=document.getElementById('pointer').innerHTML
         const content=document.getElementById('input').value
@@ -83,64 +82,69 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
     
     let notes = Array.from(document.getElementsByClassName('note')).map(note => note.id);
-    notes.forEach(note => {
-        document.getElementById(`${note}`).addEventListener('click',()=>{
-            pointer.innerText=document.getElementById(`${note}`).value;
-            fetch('/grab',{
-                method:"POST",
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({
-                    "file_name":pointer.innerText,
-                })
-            }).then(response=>response.json())
-            .then(data=>{
-                document.getElementById('input').value=data.text;
-            })
-            .catch(e=>console.error(e))
-        })
-        let edit=document.getElementById(`${note}edit`)
-        let delet=document.getElementById(`${note}delete`)
-        edit.addEventListener('click',()=>{
-            const old=document.getElementById(`${note}`).value
-            document.getElementById(`${note}`).removeAttribute("readOnly");
-            document.getElementById(`edit${note}`).src='/save.png'
-            edit.addEventListener('click',async()=>{
-                pointer.innerText=document.getElementById(`${note}`).value
-                document.getElementById(`${note}`).setAttribute("readOnly","true");
-                document.getElementById(`edit${note}`).src='/edit.png'
-
-                //document.getElementById(`${note})`).value=pointer.innerText
-                document.getElementById(`${note}`).id=pointer.innerText
-                
-                document.getElementById(`edit${note}`).id=`edit${pointer.innerText}`
-                const usr_id=document.getElementById('usr_id').value
-                await fetch('/update',{
+    console.log(notes)
+    if (notes.length===0) document.getElementById('input').value='';
+    else{
+        notes.forEach(note => {
+            document.getElementById(`${note}`).addEventListener('click',()=>{
+                pointer.innerText=document.getElementById(`${note}`).value;
+                fetch('/grab',{
                     method:"POST",
                     headers:{'Content-Type':'application/json'},
                     body:JSON.stringify({
-                        new:pointer.innerText,
-                        old:old,
-                        id:usr_id,
+                        "file_name":pointer.innerText,
                     })
                 }).then(response=>response.json())
-                .catch(e=>console.error(e))
-                window.location.href=window.location.href
-            })
-        })
-
-        delet.addEventListener('click',async()=>{
-            await fetch('/delete',{
-                method:"POST",
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({
-                    "delete": note,
-                    "id": document.getElementById('usr_id').value,
+                .then(data=>{
+                    document.getElementById('input').value=data.text;
                 })
-            }).then(response=>response.json())
-            .then(window.location.href=window.location.href)
-            .catch(e=>console.error(e))
-        })
-    });
+                .catch(e=>console.error(e))
+            })
+            let edit=document.getElementById(`${note}edit`)
+            let delet=document.getElementById(`${note}delete`)
+            edit.addEventListener('click',()=>{
+                const old=document.getElementById(`${note}`).value
+                document.getElementById(`${note}`).removeAttribute("readOnly");
+                document.getElementById(`edit${note}`).src='/save.png'
+                edit.addEventListener('click',async()=>{
+                    pointer.innerText=document.getElementById(`${note}`).value
+                    document.getElementById(`${note}`).setAttribute("readOnly","true");
+                    document.getElementById(`edit${note}`).src='/edit.png'
+    
+                    //document.getElementById(`${note})`).value=pointer.innerText
+                    document.getElementById(`${note}`).id=pointer.innerText
+                    
+                    document.getElementById(`edit${note}`).id=`edit${pointer.innerText}`
+                    const usr_id=document.getElementById('usr_id').value
+                    await fetch('/update',{
+                        method:"POST",
+                        headers:{'Content-Type':'application/json'},
+                        body:JSON.stringify({
+                            new:pointer.innerText,
+                            old:old,
+                            id:usr_id,
+                        })
+                    }).then(response=>response.json())
+                    .catch(e=>console.error(e))
+                    window.location.href=window.location.href
+                })
+            })
+    
+            delet.addEventListener('click',async()=>{
+                await fetch('/delete',{
+                    method:"POST",
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({
+                        "delete": note,
+                        "id": document.getElementById('usr_id').value,
+                    })
+                }).then(response=>response.json())
+                .then(window.location.href=window.location.href)
+                .catch(e=>console.error(e))
+            })
+        });
+    }
+    
 
     document.getElementById('submit').addEventListener('click',()=>{
         const question=document.getElementById('prompt_input').value
@@ -174,7 +178,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         })
     }).then(response=>response.json())
     .then(data=>{
-        document.getElementById('input').value=data.text;
+        if (pointer.innerText==''){
+            document.getElementById('input').value=''
+        }else document.getElementById('input').value=data.text;
     })
     .catch(e=>console.error(e))
 })
