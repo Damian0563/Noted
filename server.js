@@ -6,6 +6,7 @@ const path=require('path')
 const app=express();
 const email_validator=require('deep-email-validator')
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { ok } = require('assert');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 app.set('view engine','ejs')
@@ -113,10 +114,10 @@ app.post('/delete',async(req,res)=>{
 app.post('/signout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.status(500).json({ message: "Error signing out" });
+            return res.status(500).json({ message: "Error signing out",ok:false });
         }
         res.clearCookie('connect.sid'); // Removes session cookie
-        res.status(200).json({ message: "Signed out successfully" });
+        res.status(200).json({ message: "Signed out successfully",ok:true });
     });
 });
 

@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded',()=>{
                 method:"POST",
                 headers:{'Content-Type':'application/json'}
             }).then(response=>response.json())
-            console.log(response.status)
             if(response.ok){
                 localStorage.removeItem('userId');
                 window.location.href='/'
