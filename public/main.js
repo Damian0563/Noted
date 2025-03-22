@@ -57,13 +57,17 @@ document.addEventListener('DOMContentLoaded',()=>{
             inputField.value = '';
         }
     });
-    let pointer=document.getElementById('pointer')
-    pointer.innerText=document.getElementsByClassName('note')[0].id
-    document.getElementById('save').addEventListener('click',()=>{
+    try{
+        let pointer=document.getElementById('pointer')
+        pointer.innerText=document.getElementsByClassName('note')[0].id
+    }catch(e){
+        console.error(e)
+    }
+    document.getElementById('save').addEventListener('click',async()=>{
         const file_name=document.getElementById('pointer').innerHTML
         const content=document.getElementById('input').value
         const id=document.getElementById('usr_id').value
-        fetch('/save',{
+        await fetch('/save',{
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
@@ -100,7 +104,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             const old=document.getElementById(`${note}`).value
             document.getElementById(`${note}`).removeAttribute("readOnly");
             document.getElementById(`edit${note}`).src='/save.png'
-            edit.addEventListener('click',()=>{
+            edit.addEventListener('click',async()=>{
                 pointer.innerText=document.getElementById(`${note}`).value
                 document.getElementById(`${note}`).setAttribute("readOnly","true");
                 document.getElementById(`edit${note}`).src='/edit.png'
@@ -110,7 +114,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                 
                 document.getElementById(`edit${note}`).id=`edit${pointer.innerText}`
                 const usr_id=document.getElementById('usr_id').value
-                fetch('/update',{
+                await fetch('/update',{
                     method:"POST",
                     headers:{'Content-Type':'application/json'},
                     body:JSON.stringify({
@@ -124,8 +128,8 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
         })
 
-        delet.addEventListener('click',()=>{
-            fetch('/delete',{
+        delet.addEventListener('click',async()=>{
+            await fetch('/delete',{
                 method:"POST",
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({

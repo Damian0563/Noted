@@ -155,8 +155,12 @@ async function SaveNote(body){
     try{
         await mongo.connect(process.env.DB)
         username=await User.findOne({"_id":body.id})
-        update= await Note.findOne({"Username":username.Username,"Name":body.file_name})
-        if(update!==null){
+        //update= await Note.findOne({"Username":username.Username,"Name":body.file_name})
+        update = await Note.findOne({
+            "Username": username.Username,
+            "Notes": { $elemMatch: { "Name": body.file_name } }
+        });
+        if(update==null){
             const saved=new Note({
                 Username:username.Username,
                 Notes:[
@@ -167,6 +171,7 @@ async function SaveNote(body){
                 ]
             })
             await saved.save()
+            console.log('Saved')
         }else{
             await Note.updateOne(
                 { 
@@ -177,6 +182,7 @@ async function SaveNote(body){
                     $set: { "Notes.$.Content": body.content }
                 }
             );
+            console.log('Updated')
             
         }
     }catch(e){

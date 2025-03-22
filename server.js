@@ -6,7 +6,6 @@ const path=require('path')
 const app=express();
 const email_validator=require('deep-email-validator')
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { ok } = require('assert');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 app.set('view engine','ejs')
@@ -15,13 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(
     session({
-        secret: "9f8w908w392349238402342304edjfsa", // Change this to a secure key
-        resave: false, // Prevents resaving session if unmodified
-        saveUninitialized: true, // Saves new sessions even if unmodified
+        secret: "9f8w908w392349238402342304edjfsa",
+        resave: false, 
+        saveUninitialized: true,
         cookie: {
-        maxAge: 1000 * 60 * 60, // 1 hour
-        secure: false, // Set to true in production with HTTPS
-        httpOnly: true, // Prevents client-side JS from accessing the cookie
+        maxAge: 1000 * 60 * 60,
+        secure: false, 
+        httpOnly: true,
         },
     })
 );
@@ -79,12 +78,11 @@ app.post('/sign_in', async(req,res)=>{
 })
 
 app.post('/save',async(req,res)=>{
-    // SaveNote(req.body)
-    // res.status(200).send({message:"Success"})
     if (!req.session.userId) {
         return res.status(401).json({ message: "Unauthorized - Please sign in" });
     }
-    await SaveNote({ ...req.body, userId: req.session.userId });
+    console.log(req.body)
+    await SaveNote(req.body);
     res.status(200).json({ message: "Success" });
 })
 
@@ -101,9 +99,6 @@ app.post('/update', async(req,res)=>{
 
 
 app.post('/delete',async(req,res)=>{
-    // await DeleteNote(req.body)
-    // console.log(`Note ${req.body.delete} deleted successfuly`)
-    // res.status(200).send({message:`Note ${req.body.delete} deleted successfuly`})
     if (!req.session.userId) {
         return res.status(401).json({ message: "Unauthorized - Please sign in" });
     }
@@ -124,7 +119,6 @@ app.post('/signout', (req, res) => {
 
 app.post('/chat', async(req,res)=>{
     const result=await model.generateContent(req.body.content);
-    //console.log(result.response.text())
     res.status(200).send({message:result.response.text()})
 })
 
