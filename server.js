@@ -1,6 +1,7 @@
 require('dotenv').config()
 const {CheckDuplicates,SaveUser,VerifyCredentials,GetIdByName,GetNotes,SaveNote,GetText,DeleteNote,UpdateNote}=require('./database.js')
 const express=require('express');
+const session=require('express-session')
 const path=require('path')
 const app=express();
 const email_validator=require('deep-email-validator')
@@ -11,7 +12,18 @@ app.set('view engine','ejs')
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
-
+app.use(
+    session({
+        secret: "9f8w908w392349238402342304edjfsa", // Change this to a secure key
+        resave: false, // Prevents resaving session if unmodified
+        saveUninitialized: true, // Saves new sessions even if unmodified
+        cookie: {
+        maxAge: 1000 * 60 * 60, // 1 hour
+        secure: false, // Set to true in production with HTTPS
+        httpOnly: true, // Prevents client-side JS from accessing the cookie
+        },
+    })
+);
 
 
 app.get('/',(req,res)=>{
@@ -45,19 +57,23 @@ app.get('/sign_in',(req,res)=>{
 })
 
 app.get('/noted/:id',async (req,res)=>{
-    notes=await GetNotes(req.params.id);
-    let names=[]
-    for(note of notes){
-        if(note.Notes.length!==0) names.push(note.Notes[0].Name)
+    if (!req.session.userId) {
+        return res.status(401).json({ message: "Unauthorized - Please sign in" });
     }
-    res.render('main.ejs',{notes:names,id:req.params.id})
+    const notes = await GetNotes(req.session.userId);
+    let names = notes.map(note => note.Notes.length ? note.Notes[0].Name : null).filter(Boolean);
+    
+    res.render('main.ejs', { notes: names, id: req.session.userId });
 })
 
 app.post('/sign_in', async(req,res)=>{
-    if(await VerifyCredentials(req.body)){
-        res.status(200).json({message:'Signed in',id:await GetIdByName(req.body.mail)})
-    }else{
-        res.status(400).json({message:"Invalid credentials"})
+    const isValid = await VerifyCredentials(req.body);
+    if (isValid) {
+        const userId = await GetIdByName(req.body.mail);
+        req.session.userId = userId;
+        res.status(200).json({ message: 'Signed in', id: userId });
+    } else {
+        res.status(400).json({ message: "Invalid credentials" });
     }
 })
 
