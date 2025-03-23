@@ -82,12 +82,16 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
     
     let notes = Array.from(document.getElementsByClassName('note')).map(note => note.id);
-    console.log(notes)
+    //console.log(notes)
     if (notes.length===0) document.getElementById('input').value='';
     else{
         notes.forEach(note => {
             document.getElementById(`${note}`).addEventListener('click',()=>{
                 pointer.innerText=document.getElementById(`${note}`).value;
+                document.getElementById(`${note}`).style.backgroundColor='blueviolet'
+                notes.forEach(note=>{
+                    if(document.getElementById(`${note}`).value!=pointer.innerText) document.getElementById(`${note}`).style.backgroundColor='white'
+                })
                 fetch('/grab',{
                     method:"POST",
                     headers:{'Content-Type':'application/json'},
@@ -178,6 +182,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         })
     }).then(response=>response.json())
     .then(data=>{
+        document.getElementById(`${pointer.innerText}`).style.backgroundColor='blueviolet'
         if (pointer.innerText==''){
             document.getElementById('input').value=''
         }else document.getElementById('input').value=data.text;

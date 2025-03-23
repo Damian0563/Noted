@@ -118,10 +118,10 @@ async function GetText(name){
         const query=await Note.findOne({"Notes.Name":name});
         try{
             const text=query.Notes.find(note => note.Name === name).Content
+            return text
         }catch(e){
             return '';
         }
-        return text
     }catch(e){
         console.error(e)
     }finally{
@@ -161,7 +161,6 @@ async function SaveNote(body){
     try{
         await mongo.connect(process.env.DB)
         username=await User.findOne({"_id":body.id})
-        //update= await Note.findOne({"Username":username.Username,"Name":body.file_name})
         update = await Note.findOne({
             "Username": username.Username,
             "Notes": { $elemMatch: { "Name": body.file_name } }
@@ -177,7 +176,6 @@ async function SaveNote(body){
                 ]
             })
             await saved.save()
-            console.log('Saved')
         }else{
             await Note.updateOne(
                 { 
@@ -188,7 +186,6 @@ async function SaveNote(body){
                     $set: { "Notes.$.Content": body.content }
                 }
             );
-            console.log('Updated')
             
         }
     }catch(e){
