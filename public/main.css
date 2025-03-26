@@ -32,13 +32,14 @@
     background-color: red;
     color:white;
     margin:3%;
-    transition: transform background-color 0.5 ease;
+    transition: 0.5 ease;
 }
 
 .signout:hover{
     background-color: white;
     border: 1rem solid white;
     color:red;
+    transform: scale(1.05);
 }
 
 
@@ -51,6 +52,14 @@
     top:15%;
 }
 
+.save_note {
+    background-color: chartreuse;
+    color: white;
+    border: 1rem solid chartreuse;
+    border-radius: 10%;
+    transition: 0.5s ease;
+}
+
 .add_note{
     background-color: chartreuse;
     color: white;
@@ -59,15 +68,18 @@
     transition: 0.5s ease;
 }
 
-.add_note:hover{
-    opacity:0.75 ;
+.add_note:hover, .save_note:hover{
+    background-color: white;
+    border: 1rem solid white;
+    color:chartreuse;
+    transform: scale(1.05);
 }
 
 .notes {
     display: flex;
     flex-wrap: wrap; /* Prevents elements from overlapping */
     justify-content: space-between;
-    margin-top: 18%;
+    margin-top: 0%;
     margin-left: 2%;
     margin-right: 4%;
     margin-bottom: 7%;
@@ -95,11 +107,26 @@
 .note {
     background-color: white;
     border: 0.1rem solid black;
-    margin: 2%;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     color: black;
     padding: 3%;
     max-width: 60%; /* Allow more room for other elements */
     flex-grow: 1; /* Allows it to expand within wrapper */
+}
+
+.date{
+    background-color: black;
+    color:lightgray;
+    border: 0.1rem solid transparent;
+    margin-left:0%;
+    margin-right: 2%;
+    margin-top: 5%;
+    padding: 0%;
+    flex-grow: 1;
+    max-width: 20%;
+    cursor:default;
 }
 
 .edit,
@@ -107,6 +134,11 @@
     margin-top: 2%;
     margin-right: 2%;
     cursor: pointer; /* Add cursor to indicate interactivity */
+    transition: 0.5s ease;
+}
+
+.edit:hover, .delete:hover{
+    transform: scale(1.10);
 }
 
 .sprite {
@@ -138,21 +170,6 @@
     background-color: white;
     margin: 0.5%;
 }
-
-.save_note {
-    background-color: chartreuse;
-    color: white;
-    border: 1rem solid chartreuse;
-    border-radius: 10%;
-    transition: 0.5s ease;
-}
-
-.save_note:hover {
-    opacity: 0.75;
-}
-
-
-
 
 .prompt{
     background-color: white;
@@ -227,7 +244,7 @@
 
 .submitBtn:hover{
     transform: scale(1.05);
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); */
 }
 
 .prompt_input{
@@ -254,6 +271,25 @@
     color:  blueviolet;
     font-weight: bold;  
 }
+
+.sort{
+    background-color: blueviolet;
+    color: white;
+    border: 1rem solid blueviolet;
+    border-radius: 10%;
+    margin-top:12%;
+    margin-bottom: 3%;
+    margin-left: 4.2%;
+    transition: ease-in 0.5s;
+}
+
+.sort:hover{
+    background-color: white;
+    color: blueviolet;
+    border: 1rem solid white;
+    transform: scale(1.05)
+}
+
 
 /* Responsive Fix for Smaller Screens */
 @media (max-width: 1300px) {

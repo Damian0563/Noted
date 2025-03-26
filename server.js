@@ -63,9 +63,9 @@ app.get('/noted/:id',async (req,res)=>{
     const notes = await GetNotes(req.session.userId);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     let names = notes.map(note => note.Notes.length ? note.Notes[0].Name : null).filter(Boolean);
-    console.log(names)
+    //console.log(names)
     let dates=notes.map(note=>note.Notes.length?note.Notes[0].Date.toLocaleDateString('en-US', options):null).filter(Boolean)
-    console.log(dates)
+    //console.log(dates)
     res.render('main.ejs', { notes: names, id: req.session.userId, dates:dates });
 })
 

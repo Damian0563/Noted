@@ -17,15 +17,18 @@
             <button class="add_note" id="add">Add new note</button>
             <button class="save_note" id="save">Save note</button>
         </div>
+        <button class="sort" id="sort">
+            Sort by date
+        </button>
         <div class="notes" style="min-height:80vh ;">
                 <div class="my_notes" id="my_notes">
-                    <% notes.forEach(note => { %>
+                    <% for(let i=0;i<notes.length;i++){%>
                         <div class="wrapper">
-                            <input class="note" id="<%= note %>" value="<%= note %>" readonly>
-                            <div class="edit" id="<%= note %>edit"><img src="/edit.png" id="edit<%= note %>" alt="edit" class="sprite"></div>
-                            <div class="delete" id="<%= note %>delete"><img src="/delete.png" alt="delete" class="sprite"></div>
+                            <input class="note" id="<%= notes[i] %>" value="<%= notes[i] %>" readonly><input class="date" id="<%= dates[i] + 'date' %>" value="<%= dates[i] %>">
+                            <div class="edit" id="<%= notes[i] %>edit"><img src="/edit.png" id="edit<%= notes[i] %>" alt="edit" class="sprite"></div>
+                            <div class="delete" id="<%= notes[i] %>delete"><img src="/delete.png" alt="delete" class="sprite"></div>
                         </div>
-                    <% }); %>
+                    <% };%>
                 </div>
             <div class="current_note">
                 <p class="pointer" id="pointer"></p>
