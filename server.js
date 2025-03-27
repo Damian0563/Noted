@@ -60,13 +60,19 @@ app.get('/noted/:id',async (req,res)=>{
     if (!req.session.userId) {
         return res.status(401).json({ message: "Unauthorized - Please sign in" });
     }
-    const notes = await GetNotes(req.session.userId);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    let names = notes.map(note => note.Notes.length ? note.Notes[0].Name : null).filter(Boolean);
-    //console.log(names)
-    let dates=notes.map(note=>note.Notes.length?note.Notes[0].Date.toLocaleDateString('en-US', options):null).filter(Boolean)
-    //console.log(dates)
-    res.render('main.ejs', { notes: names, id: req.session.userId, dates:dates });
+    if(req.query.sort=='false'){
+        const notes = await GetNotes(req.session.userId);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        let names = notes.map(note => note.Notes.length ? note.Notes[0].Name : null).filter(Boolean);
+        let dates=notes.map(note=>note.Notes.length?note.Notes[0].Date.toLocaleDateString('en-US', options):null).filter(Boolean)
+        res.render('main.ejs', { notes: names, id: req.session.userId, dates:dates });
+    }else if(req.query.sort=='true'){ 
+        console.log(req.query.sort)
+    }
+    else{
+        return res.status(401).json({ message: "Unauthorized - Please sign in" });
+    }
+ 
 })
 
 app.post('/sign_in', async(req,res)=>{

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded',()=>{
     try{
         let pointer=document.getElementById('pointer')
@@ -149,6 +148,13 @@ document.addEventListener('DOMContentLoaded',()=>{
         });
     }
     
+    document.getElementById('sort').addEventListener('click',()=>{
+        fetch(`/noted/${document.getElementById('usr_id').value}?sort=true`,{
+            method:"GET",
+            headers:{'Content-Type':'application/json'},
+        }).then(response=>response.json())
+        .catch(e=>console.error(e))
+    })
 
     document.getElementById('submit').addEventListener('click',()=>{
         const question=document.getElementById('prompt_input').value

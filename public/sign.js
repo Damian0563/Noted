@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             })
             .then(data=>{
                 if(data.id!==undefined){
-                    window.location.href=`/noted/${data.id}`
+                    window.location.href=`/noted/${data.id}?sort=false`
                 }
             })
             .catch(e=>console.error(e))
