@@ -149,10 +149,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     
     document.getElementById('sort').addEventListener('click',()=>{
-        fetch(`/noted/${document.getElementById('usr_id').value}?sort=true`,{
+        const params=new URLSearchParams(window.location.search)
+        let value=params.get('sort')=='true'?'false':'true'
+        fetch(`/noted/${document.getElementById('usr_id').value}?sort=${value}`,{
             method:"GET",
             headers:{'Content-Type':'application/json'},
-        }).then(response=>response.json())
+        }).then(window.location.href=`/noted/${document.getElementById('usr_id').value}?sort=${value}`)
         .catch(e=>console.error(e))
     })
 
