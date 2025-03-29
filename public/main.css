@@ -277,7 +277,7 @@
     color: white;
     border: 1rem solid blueviolet;
     border-radius: 10%;
-    margin-top:12%;
+    margin-top:16%;
     margin-bottom: 3%;
     margin-left: 4.2%;
     transition: ease-in 0.5s;
@@ -292,7 +292,7 @@
 
 
 /* Responsive Fix for Smaller Screens */
-@media (max-width: 1300px) {
+@media (max-width: 1550px) {
     .notes {
         flex-direction: column;
         align-items: center;
@@ -325,10 +325,44 @@
     }
 }
 
+@media(max-width:800px){
+    
+    .upper_lower{
+        left:30% !important;
+    }
+    .signout{
+        width:8rem;
+    }
+    .add_note,.save_note{
+        border: 1rem solid chartreuse;
+    }   
+}
+
+
+@media(max-width:700px){
+    .sort{
+        margin-top: 20% !important;
+    }
+}
+
+@media(max-width:575px){
+    .sort{
+        margin-top: 24% !important;
+    }
+    .signout{
+        width:6rem;
+        font-size: 1rem;
+        border: 0.5rem solid red;
+    }
+}
 
 @media(max-width:1150px){
     .upper_lower{
         top:5%;
         left: 20%;
+    }
+    .submitBtn{
+        height:1.5rem ;
+        width:1.5rem ;
     }
 }

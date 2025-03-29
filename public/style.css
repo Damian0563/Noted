@@ -21,7 +21,7 @@
     background-color: blueviolet;
     color:white;
     margin:3%;
-    transition: transform background-color 0.5 ease;
+    transition: ease-in 0.5s;
 }
 
 #signin:hover,#signup:hover{
@@ -87,6 +87,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 0%;
 }
 
 /* Input Fields */
@@ -97,7 +98,7 @@ body {
     border-radius: 5px;
     font-size: 16px;
     width: 100%;
-    transition: border 0.3s ease;
+    transition: 0.3s ease-in;
 }
 
 /* Focus Effect on Input Fields */
@@ -116,6 +117,7 @@ body {
     margin-top: 0;
 }
 
+
 .submit {
     background-color: #4c8bf5;
     color: white;
@@ -124,11 +126,30 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
+    transition: 0.3s ease-in;
 }
 
 .submit:hover {
-    background-color: #3578e5;
+    background-color:#4c8bf5;
+    color:white;
+    transform: scale(1.05);
+}
+
+@media (max-width: 1000px) {
+    .sign_box {
+        width: 50%; /* Adjust width for better responsiveness */
+        padding: 20px; /* Reduce padding to save space */
+        gap: 10px; /* Slightly reduce gap */
+    }
+}
+
+@media(max-width:500px){
+    .sign_box {
+        width: 70% !important;
+        padding: 15px !important;
+        gap: 4px !important;
+        max-width: none; /* Ensures width change works */
+    }
 }
 
 /* General styles for the back button */
@@ -227,7 +248,31 @@ body {
     transition: all 0.3s ease;
     margin-left:5%;
     margin-right: 5%;
-  }
+}
+
+@media(max-width:1130px){
+    .card{
+        width:300px;
+        height:350px;
+    }
+    .display{
+        height:20rem;
+        top:85%;
+    }
+    .footer{
+        top:100%;
+    }
+}
+
+@media(max-width:800px){
+    .display{
+        top:50%;
+        height: 10rem;
+    }
+    .footer{
+        top:70%;
+    }
+}
   
 .head {
 font-family: Montserrat, sans-serif;
@@ -268,4 +313,5 @@ translate: -6px;
 .footer a:hover {
     text-decoration: underline;
 }
+
 
