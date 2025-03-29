@@ -343,6 +343,9 @@
     .sort{
         margin-top: 20% !important;
     }
+    .prompt_input{
+        width:75%;
+    }
 }
 
 @media(max-width:575px){
@@ -364,5 +367,70 @@
     .submitBtn{
         height:1.5rem ;
         width:1.5rem ;
+    }
+}
+
+@media(max-width:530px){
+    .brand{
+        top:2%;
+    }
+    .signout{
+        margin-top: 40%;
+        margin-right: 1% !important;
+    }
+    .upper_lower{
+        top:2%;
+        left:40% !important;
+    }
+    .sprite{
+        width:1.5rem;
+        height: 1.5rem;
+        margin-top: 1%;
+    }
+    .note{
+        max-width: 40%;
+    }
+    .date{
+        max-width: 25%;
+    }
+}
+
+@media(max-width:430px){
+    .save_note,.add_note{
+        border:0.5rem solid chartreuse;
+    }
+    .sort{
+        border:0.5rem solid blueviolet;
+    }
+    .notes{
+        padding: 1%;
+    }
+    .date{
+        font-size: 0.6rem;
+        max-width: 20%;
+    }
+    .signout{
+        margin-top: 30% !important;
+    }
+    .brand{
+        font-size: 1.5rem;
+    }
+    .upper_lower{
+        left:30% !important;
+    }
+}
+
+@media(max-width:380px){
+    .signout{
+        margin-top: 21% !important;
+    }
+    .date{
+        font-size: 0.5rem;
+        max-width: 20%;
+    }
+    .sprite{
+        width:1rem;
+        height: 1rem;
+        margin-top: 2% !important;
     }
 }
