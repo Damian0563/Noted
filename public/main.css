@@ -169,6 +169,7 @@
     color: gray;
     background-color: white;
     margin: 0.5%;
+    max-width: 60%;
 }
 
 .prompt{
@@ -194,7 +195,7 @@
     padding: 2%;
     width: 90%;
     border: 0.4rem solid white;
-    height: 60vh;
+    height: 65vh;
     overflow-y: auto; /* Allows scrolling */
     position: relative;
     background-color: #f8f8f8;
@@ -290,6 +291,35 @@
     transform: scale(1.05)
 }
 
+.download{
+    border:0.1rem solid chartreuse;
+    border-radius: 10%;
+    padding: 1%;
+    margin-top: 0%;
+    background-color: chartreuse;
+    color:white;
+    transition: 0.6s ease-in-out;
+}
+
+.upp{
+    background-color: white;
+    display: flex; /* Makes children inline */
+    justify-content: space-between; /* Optional: space between elements */
+    align-items: center; /* Optional: vertically aligns items */
+    margin-bottom: 0.5%;
+}
+
+.download:hover{
+    transform: scale(1.05);
+    border: 0.1rem solid chartreuse;
+    color: chartreuse;
+    background-color: white;
+}
+
+.chatbot{
+    margin:auto;
+    width:40%;
+}
 
 /* Responsive Fix for Smaller Screens */
 @media (max-width: 1550px) {
@@ -344,7 +374,7 @@
         margin-top: 20% !important;
     }
     .prompt_input{
-        width:75%;
+        width:75%; 
     }
 }
 

@@ -58,7 +58,7 @@ app.get('/sign_in',(req,res)=>{
 
 app.get('/noted/:id',async (req,res)=>{
     if (!req.session.userId) {
-        return res.status(401).json({ message: "Unauthorized - Please sign in" });
+        return res.redirect('/')
     }
     if(req.query.sort=='false'){
         const notes = await GetNotes(req.session.userId);
@@ -80,7 +80,7 @@ app.get('/noted/:id',async (req,res)=>{
         res.render('main.ejs', { notes: names, id: req.session.userId, dates:dates });
     }
     else{
-        return res.status(401).json({ message: "Unauthorized - Please sign in" });
+        return res.redirect('/')
     }
  
 })
@@ -98,7 +98,7 @@ app.post('/sign_in', async(req,res)=>{
 
 app.post('/save',async(req,res)=>{
     if (!req.session.userId) {
-        return res.status(401).json({ message: "Unauthorized - Please sign in" });
+        return res.redirect('/')
     }
     //console.log(req.body)
     await SaveNote(req.body);
@@ -118,8 +118,8 @@ app.post('/update', async(req,res)=>{
 
 
 app.post('/delete',async(req,res)=>{
-    if (!req.session.userId) {
-        return res.status(401).json({ message: "Unauthorized - Please sign in" });
+    if (!req.session.userId){
+        return res.redirect('/')
     }
     await DeleteNote({ ...req.body, userId: req.session.userId });
     res.status(200).json({ message: `Note ${req.body.delete} deleted successfully` });

@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                         "id": document.getElementById('usr_id').value,
                     })
                 }).then(response=>response.json())
-                .then(window.location.href=window.location.href)
+                .then(() => window.location.reload())
                 .catch(e=>console.error(e))
             })
         });
@@ -165,6 +165,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         prompt.classList.add('me')
         prompt.innerText=question
         document.getElementById('talk').appendChild(prompt)
+        let box=document.getElementById('talk')
+        let img=box.querySelector('img')
+        box.removeChild(img)
         fetch('/chat',{
             method:"POST",
             headers:{'Content-Type':'application/json'},
