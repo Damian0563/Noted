@@ -182,7 +182,38 @@ document.addEventListener('DOMContentLoaded',()=>{
         .catch(e=>console.error(e))
     })
 
+    document.getElementById('download').addEventListener('click',async()=>{
+        try{
+            const { Document, Packer, Paragraph, TextRun } = window.docx;
+            const filename = document.getElementById('pointer').innerText.trim()
+            const text_content = document.getElementById('input').value;
+            const doc = new Document({
+                sections: [
+                    {
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: text_content,
+                                        break: 1
+                                    })
+                                ]
+                            })
+                        ]
+                    }
+                ]
+            });
+            const blob = await Packer.toBlob(doc);
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = filename.endsWith('.docx') ? filename : filename + ".docx";
+            link.click();
 
+            URL.revokeObjectURL(link.href);
+        }catch(e){
+            console.error(e)
+        }
+    })
 
 
     fetch('/grab',{
@@ -196,7 +227,10 @@ document.addEventListener('DOMContentLoaded',()=>{
         document.getElementById(`${pointer.innerText}`).style.backgroundColor='blueviolet'
         if (pointer.innerText==''){
             document.getElementById('input').value=''
-        }else document.getElementById('input').value=data.text;
+        }else{
+            if(data.text!='') document.getElementById('input').value=data.text
+            else document.getElementById('input').value=''
+        };
     })
     .catch(e=>console.error(e))
 })

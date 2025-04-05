@@ -86,7 +86,7 @@
     padding: 2%;
     width: 90%;
     border: 1rem solid white;
-    border-radius: 10%;
+    border-radius: 2%;
 }
 
 /* Ensuring my_notes and current_note are side by side properly */
@@ -154,6 +154,7 @@
     min-height: 75%;
     max-height: 80%;
     padding: 1%;
+    border-radius:2% ;
     position: relative; /* Changed from absolute */
 }
 
@@ -175,7 +176,7 @@
 .prompt{
     background-color: white;
     border: 1rem solid white;
-    border-radius: 8%;
+    border-radius: 2%;
     color:black;
     display: flexbox;
     padding: 1%;
@@ -194,11 +195,11 @@
     margin: 3% 4% 2% 2%;
     padding: 2%;
     width: 90%;
-    border: 0.4rem solid white;
+    border: 0.4rem solid rgba(255, 255, 255, 1);
     height: 65vh;
     overflow-y: auto; /* Allows scrolling */
     position: relative;
-    background-color: #f8f8f8;
+    background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
 }
 
@@ -249,10 +250,10 @@
 }
 
 .prompt_input{
-    resize: none;
     width:90%;
     height: 4.5rem;
-    padding: 1%;
+    font-size: 1.2rem;
+    padding: 0.2% 2%;
 }
 
 #assistant{

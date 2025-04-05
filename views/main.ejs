@@ -32,7 +32,7 @@
                     <% };%>
                 </div>
             <div class="current_note">
-                <div class="upp"><p class="pointer" id="pointer"></p><button class="download">Download Note</button></div>
+                <div class="upp"><p class="pointer" id="pointer"></p><button id="download" class="download">Download Note</button></div>
                 <textarea class="note_content" id="input">
                     
                 </textarea>
@@ -47,11 +47,10 @@
         <div class="prompt">
             <div class="submit"><img class="submitBtn" src="/send.png" id="submit" alt="submit"></div>
             <div class="question" id="question">
-                <textarea class="prompt_input" id="prompt_input">
-
-                </textarea>
+                <input class="prompt_input" id="prompt_input" placeholder="Type here... ">
             </div>
         </div>
         <script src="../main.js"></script>
+        <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
     </body>
 </html>
