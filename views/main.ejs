@@ -18,9 +18,14 @@
             <button class="add_note" id="add">Add new note</button>
             <button class="save_note" id="save">Save note</button>
         </div>
-        <button class="sort" id="sort">
-            Sort by date
-        </button>
+        <div class="lower">
+            <button class="sort" id="sort">
+                Sort by date
+            </button>
+            <button class="dictate" id="dictate">
+                Dictate
+            </button>
+        </div>
         <div class="notes" style="min-height:80vh ;">
                 <div class="my_notes" id="my_notes">
                     <% for(let i=0;i<notes.length;i++){%>

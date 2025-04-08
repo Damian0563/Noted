@@ -322,6 +322,29 @@
     width:40%;
 }
 
+.lower{
+    display: flex;
+    margin-left:3%;
+}
+
+.dictate{
+    background-color: blueviolet;
+    color: white;
+    border: 1rem solid blueviolet;
+    border-radius: 10%;
+    margin-top:16%;
+    margin-bottom: 3%;
+    margin-left: 4.2%;
+    transition: ease-in 0.5s;
+}
+
+.dictate:hover{
+    background-color: white;
+    color: blueviolet;
+    border: 1rem solid white;
+    transform: scale(1.05)
+} 
+
 /* Responsive Fix for Smaller Screens */
 @media (max-width: 1550px) {
     .notes {
