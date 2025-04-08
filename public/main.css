@@ -324,7 +324,7 @@
 
 .lower{
     display: flex;
-    margin-left:3%;
+    margin-left:0%;
 }
 
 .dictate{
@@ -334,7 +334,7 @@
     border-radius: 10%;
     margin-top:16%;
     margin-bottom: 3%;
-    margin-left: 4.2%;
+    margin-left: 0.5%;
     transition: ease-in 0.5s;
 }
 

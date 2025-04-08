@@ -141,6 +141,17 @@ app.post('/chat', async(req,res)=>{
     res.status(200).send({message:result.response.text()})
 })
 
+app.post('/dictate', async(req,res)=>{
+    (async () => {
+        const { SpeechlyClient } = await import('@speechly/browser-client');
+        
+        // You can now use SpeechlyClient here
+        const client = new SpeechlyClient({ appId: process.env.SECRET });
+      })();
+    
+      res.send(200).json("Listening...")
+})
+
 
 app.listen(process.env.PORT,()=>{
     console.log('Server running on port',process.env.PORT)
