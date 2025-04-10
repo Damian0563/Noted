@@ -215,6 +215,26 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     })
 
+    let isDictating = false;
+
+    document.getElementById('dictate').addEventListener('click', async () => {
+        const button = document.getElementById('dictate');
+        if (!isDictating) {
+            // Start dictating
+            button.innerText = 'Stop dictating';
+            button.style.backgroundColor = 'white';
+            button.style.border = '1rem solid white';
+            button.style.color = 'red';
+        } else {
+            // Stop dictating
+            button.innerText = 'Dictate';
+            button.style.backgroundColor = 'blueviolet'; // correct color name (not 'blue violet')
+            button.style.border = '1rem solid blueviolet';
+            button.style.color = 'white';
+        }
+        isDictating = !isDictating;
+    });
+
 
     fetch('/grab',{
         method:"POST",

@@ -144,10 +144,13 @@ app.post('/chat', async(req,res)=>{
 app.post('/dictate', async(req,res)=>{
     (async () => {
         const { SpeechlyClient } = await import('@speechly/browser-client');
-        
-        // You can now use SpeechlyClient here
         const client = new SpeechlyClient({ appId: process.env.SECRET });
-      })();
+        client.onSegmentChange(segment => {
+            if (segment.isFinal) {
+              console.log('Final transcript:', segment.words.map(w => w.value).join(' '));
+            }
+          });
+    })();
     
       res.send(200).json("Listening...")
 })
