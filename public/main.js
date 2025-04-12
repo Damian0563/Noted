@@ -1,4 +1,3 @@
-import { BrowserClient, BrowserMicrophone } from '@speechly/browser-client';
 document.addEventListener('DOMContentLoaded',()=>{
     try{
         let pointer=document.getElementById('pointer')
@@ -216,13 +215,34 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     })
 
+    if (annyang) {
+        console.log(annyang)
+        let isDictating = false;
+        const handleSpeech = function (phrases) {
+            document.getElementById('input').innerText += phrases[0];
+            //console.log("Recognized:", phrases[0]);
+        };
+        annyang.addCallback('result', handleSpeech);
+        document.getElementById('dictate').addEventListener('click', () => {
+            const button = document.getElementById('dictate');
     
-    const microphone = new BrowserMicrophone();
-    const client = new BrowserClient({
-        appId: 'YOUR-APP-ID',
-        logSegments: true,
-        debug: true,
-    });
+            if (!isDictating) {
+                button.innerText = 'Stop dictating';
+                button.style.backgroundColor = 'white';
+                button.style.border = '1rem solid white';
+                button.style.color = 'red';
+                annyang.start();
+            } else {
+                button.innerText = 'Dictate';
+                button.style.backgroundColor = 'blueviolet';
+                button.style.border = '1rem solid blueviolet';
+                button.style.color = 'white';
+                setTimeout(annyang.pause(),1000);
+            }
+            isDictating = !isDictating;
+        });
+    }
+    
 
 
 
