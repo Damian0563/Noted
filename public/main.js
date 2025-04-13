@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         console.log(annyang)
         let isDictating = false;
         const handleSpeech = function (phrases) {
-            document.getElementById('input').innerText += phrases[0];
+            document.getElementById('input').value += phrases[0];
             //console.log("Recognized:", phrases[0]);
         };
         annyang.addCallback('result', handleSpeech);
